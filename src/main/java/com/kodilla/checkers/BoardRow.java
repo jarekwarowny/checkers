@@ -6,9 +6,10 @@ import java.util.List;
 public class BoardRow {
 
     private final List<Figure> figures = new ArrayList<>();
+    public static final int COLUMNS_NUM = 8;
 
     public BoardRow() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < COLUMNS_NUM; i++) {
             figures.add(new None());
         }
     }
@@ -28,7 +29,7 @@ public class BoardRow {
     @Override
     public String toString() {
        String row = "|";
-       for (int n = 0; n < 8; n++) {
+       for (int n = 0; n < COLUMNS_NUM; n++) {
            row += figures.get(n).toString() + "|";
        }
        return row;

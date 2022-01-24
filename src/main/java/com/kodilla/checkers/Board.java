@@ -1,16 +1,30 @@
 package com.kodilla.checkers;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board implements ActionListener, MouseListener {
+
+    boolean gameInProgress;
+    int currentPlayer;
+    int selectRow, slectedCol;
+    Move[] legalMoves;
 
     private final List<BoardRow> rows = new ArrayList<>();
 
+    public static final int ROWS_NUM = 8;
+
+
     public Board() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < ROWS_NUM; i++) {
             rows.add(new BoardRow());
         }
+        initialSetup();
     }
 
     public Figure getFigure(int row, int col) {
@@ -31,9 +45,9 @@ public class Board {
         } else if (col2 < 0 || col2 >= rows.size()) {
             return false;
         }
-        Figure figure = getFigure(row1,col1);
-        setFigure(row2,col2, figure);
-        setFigure(row1,col1, new None());
+        Figure figure = getFigure(row1, col1);
+        setFigure(row2, col2, figure);
+        setFigure(row1, col1, new None());
         return true;
     }
 
@@ -45,5 +59,63 @@ public class Board {
         }
         board += "-------------------------\n";
         return board;
+    }
+
+    public void initialSetup() {
+        this.setFigure(0, 0, new Pawn(FigureColor.BLUE));
+        this.setFigure(0, 2, new Pawn(FigureColor.BLUE));
+        this.setFigure(0, 4, new Pawn(FigureColor.BLUE));
+        this.setFigure(0, 6, new Pawn(FigureColor.BLUE));
+        this.setFigure(1, 1, new Pawn(FigureColor.BLUE));
+        this.setFigure(1, 3, new Pawn(FigureColor.BLUE));
+        this.setFigure(1, 5, new Pawn(FigureColor.BLUE));
+        this.setFigure(1, 7, new Pawn(FigureColor.BLUE));
+        this.setFigure(2, 0, new Pawn(FigureColor.BLUE));
+        this.setFigure(2, 2, new Pawn(FigureColor.BLUE));
+        this.setFigure(2, 4, new Pawn(FigureColor.BLUE));
+        this.setFigure(2, 6, new Pawn(FigureColor.BLUE));
+
+        this.setFigure(6, 0, new Pawn(FigureColor.BROWN));
+        this.setFigure(6, 2, new Pawn(FigureColor.BROWN));
+        this.setFigure(6, 4, new Pawn(FigureColor.BROWN));
+        this.setFigure(6, 6, new Pawn(FigureColor.BROWN));
+        this.setFigure(7, 1, new Pawn(FigureColor.BROWN));
+        this.setFigure(7, 3, new Pawn(FigureColor.BROWN));
+        this.setFigure(7, 5, new Pawn(FigureColor.BROWN));
+        this.setFigure(7, 7, new Pawn(FigureColor.BROWN));
+        this.setFigure(5, 1, new Pawn(FigureColor.BROWN));
+        this.setFigure(5, 3, new Pawn(FigureColor.BROWN));
+        this.setFigure(5, 5, new Pawn(FigureColor.BROWN));
+        this.setFigure(5, 7, new Pawn(FigureColor.BROWN));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
