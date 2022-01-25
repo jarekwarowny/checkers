@@ -1,6 +1,9 @@
 package com.kodilla.checkers;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -8,12 +11,17 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements ActionListener, MouseListener {
+import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
+
+public class Board extends JPanel implements ActionListener, MouseListener {
 
     boolean gameInProgress;
     int currentPlayer;
-    int selectRow, slectedCol;
+    int selectedRow;
+    int selectedCol;
     Move[] legalMoves;
+    Figure figure;
+
 
     private final List<BoardRow> rows = new ArrayList<>();
 
@@ -25,6 +33,9 @@ public class Board implements ActionListener, MouseListener {
             rows.add(new BoardRow());
         }
         initialSetup();
+        addMouseListener(this);
+        doNewGame();
+        doResigne();
     }
 
     public Figure getFigure(int row, int col) {
@@ -89,9 +100,32 @@ public class Board implements ActionListener, MouseListener {
         this.setFigure(5, 7, new Pawn(FigureColor.BROWN));
     }
 
+    private void doNewGame() {
+        if (gameInProgress == true) {
+            System.out.println("Rozgrywka trwa");
+        }
+    }
+
+    private void doResigne() {
+        if (gameInProgress == false) {
+            System.out.println("Gra nie rozpoczęta");
+        } else if (currentPlayer == ) {
+
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Object src = e.getSource();
+        JButton newGameButton = new JButton("Nowa gra");
+        JButton resignButton = new JButton("Rezygnacja");
+        resignButton.addActionListener(this);
+        newGameButton.addActionListener(this);
+        if (src == newGameButton) {
+            doNewGame();
+        } else if (src == resignButton) {
+            doResigne();
+        }
     }
 
     @Override
